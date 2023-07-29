@@ -1,6 +1,9 @@
 import express from 'express'
+import dotenv from 'dotenv'
+dotenv.config() // putting it here because bc we have to call config method before using any of the variables
 import products from './data/products.js'
-const port = 5001
+const port = process.env.PORT || 5001
+// use port in .env file or 5000 as a fallback if .env not found
 
 const app = express()
 
