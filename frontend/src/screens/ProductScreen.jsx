@@ -1,6 +1,5 @@
-import React from 'react'
-import { useParams } from 'react-router-dom'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { useParams, Link } from 'react-router-dom'
 import {
   Row,
   Col,
@@ -11,12 +10,20 @@ import {
   ListGroupItem,
 } from 'react-bootstrap'
 import Rating from '../components/Rating'
-import products from '../products'
+import axios from 'axios'
 
 const ProductScreen = () => {
+  const [product, setProduct] = useState({})
+
   const { id: productId } = useParams()
-  const product = products.find((p) => p._id === productId)
-  console.log(product)
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      const { data } = await axios.get(`/api/products/${productId}`)
+      setProduct(data)
+    }
+    fetchProduct()
+  }, [productId]) // add productId as a dependency in the 2nd arg because we want to up date each time the productId changes
 
   return (
     <>
