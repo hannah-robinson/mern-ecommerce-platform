@@ -4,7 +4,7 @@ dotenv.config() // putting it here because bc we have to call config method befo
 import connectDB from './config/db.js'
 import productRoutes from './routes/productRoutes.js'
 const port = process.env.PORT || 5001
-// use port in .env file or 5000 as a fallback if .env not found
+// use port in .env file or 5001 as a fallback if .env not found
 
 connectDB() // connect to  MongoDB
 
