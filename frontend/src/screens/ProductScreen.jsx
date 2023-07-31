@@ -9,6 +9,7 @@ import {
   ListGroupItem,
 } from 'react-bootstrap'
 import Rating from '../components/Rating'
+import Loader from '../components/Loader'
 import { useGetProductDetailsQuery } from '../slices/productsApiSlice.js'
 
 const ProductScreen = () => {
@@ -23,7 +24,7 @@ const ProductScreen = () => {
   return (
     <>
       {isLoading ? (
-        <h2>Loading...</h2>
+        <Loader />
       ) : error ? (
         <div>{error?.data?.message || error.error}</div>
       ) : (
