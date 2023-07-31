@@ -2,6 +2,8 @@ import React from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
 import Loader from '../components/Loader'
+import Message from '../components/Message'
+
 import { useGetProductsQuery } from '../slices/productsApiSlice.js'
 
 const HomeScreen = () => {
@@ -11,7 +13,9 @@ const HomeScreen = () => {
       {isLoading ? (
         <Loader />
       ) : error ? (
-        error?.data?.message || error.error
+        <Message variant='danger'>
+          {error?.data?.message || error.error}
+        </Message>
       ) : (
         <>
           <h1>Latest Products</h1>
