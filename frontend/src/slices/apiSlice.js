@@ -7,5 +7,5 @@ const baseQuery = fetchBaseQuery({ baseUrl: BASE_URL })
 export const apiSlice = createApi({
   baseQuery,
   tagTypes: ['Product', 'Order', 'User'],
-  endpoints: (builder) => ({}),
+  endpoints: (builder) => ({}), // We don't need to write anything inside the empty object because the children slices (productsApiSlice.js, etc.) are injecting the endpoints here.
 })
