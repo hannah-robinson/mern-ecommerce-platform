@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import {
   Row,
@@ -6,6 +7,7 @@ import {
   ListGroup,
   Card,
   Button,
+  Form,
   ListGroupItem,
 } from 'react-bootstrap'
 import Rating from '../components/Rating'
@@ -15,6 +17,9 @@ import { useGetProductDetailsQuery } from '../slices/productsApiSlice.js'
 
 const ProductScreen = () => {
   const { id: productId } = useParams()
+
+  const [qty, setQty] = useState(1)
+  // This is just component-level state so we don't need Redux
 
   const {
     data: product,
@@ -79,6 +84,28 @@ const ProductScreen = () => {
                       </Col>
                     </Row>
                   </ListGroup.Item>
+                  {product.countInStock > 0 && (
+                    <ListGroup.Item>
+                      <Row>
+                        <Col>Quantity</Col>
+                        <Col>
+                          <Form.Control
+                            as='select'
+                            value={qty}
+                            onChange={(e) => setQty(Number(e.target.value))}
+                          >
+                            {[...Array(product.countInStock).keys()].map(
+                              (x) => (
+                                <option key={x + 1} value={x + 1}>
+                                  {x + 1}
+                                </option>
+                              )
+                            )}
+                          </Form.Control>
+                        </Col>
+                      </Row>
+                    </ListGroup.Item>
+                  )}
                   <ListGroup.Item>
                     <Button
                       className='btn-block'
